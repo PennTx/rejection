@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef } from 'react';
+import React from 'react';
 
 import rejection, { createQuestion, answerQuestion, deleteQuestion, getScore } from './features/rejection/rejection-reducer';
 import Score from './features/rejection/score/score-hoc';
