@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { loadLocalStorage } from './features/rejection/rejection-sagas';
-import Score from './features/rejection/score/score-container';
-import AddQuestion from './features/rejection/add-question/add-question-container';
-import QuestionList from './features/rejection/question-list/question-list-container';
+import Score from './features/rejection/score/index';
+import AddQuestion from './features/rejection/add-question/index';
+import QuestionList from './features/rejection/question-list/index';
 
 function App({ loadLocalStorage }) {
   useEffect(() => {
