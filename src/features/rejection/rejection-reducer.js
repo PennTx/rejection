@@ -26,6 +26,11 @@ export const deleteQuestion = ({ id } = {}) => ({
   }
 });
 
+export const loadQuestions = (questions = []) => ({
+  type: 'rejection-reducer/loadQuestions',
+  payload: questions
+});
+
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
     case createQuestion().type:
@@ -39,6 +44,8 @@ export default (state = [], { type, payload } = {}) => {
       });
     case deleteQuestion().type:
       return state.filter(question => question.id !== payload.id);
+    case loadQuestions().type:
+      return state.concat(payload);
     default:
       return state;
   }
@@ -53,4 +60,6 @@ const getScore = state =>
     );
 
 export { getScore };
+
+export const getState = state => state;
 

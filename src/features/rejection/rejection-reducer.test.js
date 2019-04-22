@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe } from 'riteway';
 
-import reducer, { createQuestion, answerQuestion, deleteQuestion, getScore } from './rejection-reducer';
+import reducer, { createQuestion, answerQuestion, deleteQuestion, loadQuestions, getScore, getState } from './rejection-reducer';
 
 const getObjectFromQuestion = () => ({ question, askee, status }) => ({
     question,
@@ -10,7 +10,7 @@ const getObjectFromQuestion = () => ({ question, askee, status }) => ({
 });
 
 /*
-5 Questions Ever Unit Test Must Answer
+5 Questions Every Unit Test Must Answer
 1. What are we testing? (component, etc)
 2. What behavior are we testing (in prose)
 3. What is the actual output?
@@ -82,6 +82,20 @@ describe('rejection reducer', async assert => {
       expected: [questionTwo]
     });
 
+    {
+      const localState = [questionOne, questionTwo]
+        .map(question => createQuestion(question))
+        .reduce(reducer, reducer())
+
+      assert({
+        given: 'a load questions action',
+        should: 'load all the input questions into the reduced state',
+        actual: reducer(undefined, loadQuestions(localState)),
+        expected: localState
+      });
+
+    }
+
   }
 
 });
@@ -112,6 +126,35 @@ describe('rejection reducer getScore', async assert => {
     should: 'tally the score',
     actual,
     expected: 21
+  });
+});
+
+describe('rejection reducer getState', async assert => {
+  const actions = [
+    createQuestion({
+      question: 'May I have a raise?',
+      askee: 'Boss',
+      status: 'Rejected'
+    }),
+    createQuestion({
+      question: 'May I have a raise?',
+      askee: 'Boss',
+      status: 'Rejected'
+    }),
+    createQuestion({
+      question: 'May I have a raise?',
+      askee: 'Boss',
+      status: 'Accepted'
+    })
+  ];
+  const initialState = actions.reduce(reducer, reducer());
+  const actual = getState(initialState);
+
+  assert({
+    given: 'questions in state',
+    should: 'return all questions',
+    actual,
+    expected: initialState 
   });
 });
 
