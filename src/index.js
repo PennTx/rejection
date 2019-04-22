@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import rejection, { createQuestion, answerQuestion, deleteQuestion, getScore } from './features/rejection/rejection-reducer';
+import { loadLocalStorage } from './features/rejection/rejection-sagas';
 import Score from './features/rejection/score/score-hoc';
 import AddQuestion from './features/rejection/add-question/add-question-hoc';
 import QuestionList from './features/rejection/question-list/question-list-hoc';
 
-function App() {
+function App({ loadLocalStorage }) {
+  useEffect(() => {
+    loadLocalStorage();
+  }, []);
 
   return (
     <div>
@@ -54,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { loadLocalStorage })(App);
