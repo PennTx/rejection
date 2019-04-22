@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
+    "functional-test": "testcafe all src/test.functional.js",
     "test": "node -r @babel/register -r @babel/polyfill src/test",
     "build": "npm run test && next build",
     "install": "npm install",
@@ -22,5 +23,8 @@
   },
   "license": "ISC",
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "testcafe": "^1.1.3"
+  }
 }
