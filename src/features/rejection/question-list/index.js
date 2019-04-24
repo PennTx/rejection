@@ -7,20 +7,17 @@ const mapStateToProps = state => ({
   questions: state
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   handleToggleQuestionStatusClick: (id, status, event) =>
-    dispatch(
-     answerQuestion({
-       id,
-       status: (status === 'Accepted' ? 'Rejected' : status === 'Rejected' ? 'Unanswered' : 'Accepted' )
-     })
-    ),
+    answerQuestion({
+      id,
+      status: (status === 'Accepted' ? 'Rejected' : status === 'Rejected' ? 'Unanswered' : 'Accepted' )
+    }),
   handleDeleteQuestionClick: (id, event) =>
-    dispatch(
-     deleteQuestion({
-       id
-     })
-    )
-});
+    deleteQuestion({
+      id
+    })
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);
